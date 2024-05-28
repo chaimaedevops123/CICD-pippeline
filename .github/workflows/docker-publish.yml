@@ -9,29 +9,23 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      -
-        name: Login to DockerHub
+      - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - 
-        name: Check
+      - name: Check
         uses: actions/checkout@v3
-      -      
-        name: Show Makefile commands
+      - name: Show Makefile commands
         run: cat Makefile
-      -      
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./source  # Updated to 'source'
-          file: ./source/Dockerfile  # Updated to 'source'
+          context: ./source
+          file: ./source/Dockerfile
           push: true
           tags: chaimaedevops123/pipelinecicd:1.0.${{github.run_number}}
