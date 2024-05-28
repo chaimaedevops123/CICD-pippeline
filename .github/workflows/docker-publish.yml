@@ -1,31 +1,23 @@
-name: Update the container calculator
+name: CI
 
 on:
   push:
-    branches:
-      - 'main'
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Login to DockerHub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Check
-        uses: actions/checkout@v3
-      - name: Show Makefile commands
-        run: cat Makefile
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: ./source
-          file: ./source/Dockerfile
-          push: true
-          tags: pipelinecicd/swc1:1.0.${{github.run_number}}  # Tag en minuscules
+    - uses: actions/checkout@v2
+
+    - name: Install CUnit
+      run: sudo apt-get install libcunit1 libcunit1-dev
+
+    - name: Build
+      run: make all
+
+    - name: Run Tests
+      run: make test
