@@ -28,4 +28,5 @@ jobs:
           context: ./source
           file: ./source/Dockerfile
           push: true
-          tags: chaimaedevops123/pipelinecicd:1.0.${{github.run_number}}
+          tags: chaimaedevops123/CICD-pippeline:1.0.${{github.run_number}}
+         
