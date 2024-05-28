@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 # Mettre à jour le gestionnaire de paquets et installer les outils nécessaires
 RUN apt-get update && \
-    apt-get install -y build-essential gcc libcunit1 libcunit1-dev make
+    apt-get install -y build-essential gcc libcunit1 libcunit1-dev
 
 # Définir le répertoire de travail
 WORKDIR /app

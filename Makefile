@@ -1,6 +1,3 @@
-# Nom du programme principal
-TARGET = swc_program
-
 # Nom du programme de test
 TEST_TARGET = test_program
 
@@ -13,14 +10,8 @@ CFLAGS = -Wall -Wextra -pedantic -std=c11
 # Options de l'édition des liens
 LDFLAGS = -lcunit
 
-# Liste des fichiers source pour le programme principal
-SRCS = SWC.c
-
 # Liste des fichiers source pour le programme de test
 TEST_SRCS = testProtocole.c
-
-# Liste des fichiers objets pour le programme principal
-OBJS = $(SRCS:.c=.o)
 
 # Liste des fichiers objets pour le programme de test
 TEST_OBJS = $(TEST_SRCS:.c=.o)
@@ -38,14 +29,10 @@ RM = rm -f
 MKDIR = mkdir -p
 
 # Règle par défaut
-all: $(TARGET) $(TEST_TARGET)
-
-# Compilation du programme principal
-$(TARGET): $(OBJ_DIR) $(OBJS)
-    $(CC) $(CFLAGS) $(OBJ_DIR)/*.o -o $@
+all: $(TEST_TARGET)
 
 # Compilation du programme de test
-$(TEST_TARGET): $(OBJ_DIR) $(OBJS) $(TEST_OBJS)
+$(TEST_TARGET): $(OBJ_DIR) $(TEST_OBJS)
     $(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_DIR)/*.o $(TEST_OBJS) -o $@
 
 # Création du répertoire d'objets
@@ -58,7 +45,7 @@ $(OBJ_DIR)/%.o: %.c
 
 # Nettoyage des fichiers objets et des exécutables
 clean:
-    $(RM) $(OBJ_DIR)/*.o $(TARGET) $(TEST_TARGET)
+    $(RM) $(OBJ_DIR)/*.o $(TEST_TARGET)
 
 # Lancer les tests
 test: $(TEST_TARGET)
