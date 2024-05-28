@@ -28,4 +28,4 @@ jobs:
           context: ./source
           file: ./source/Dockerfile
           push: true
-          tags: chaimaedevops123/cicd-pipeline:1.0.${{github.run_number}}  # Tag en minuscules
+          tags: pipelinecicd/ swc1:1.0.${{github.run_number}}  # Tag en minuscules
